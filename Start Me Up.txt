@@ -1,0 +1,4 @@
+mongod --dbpath ./server
+
+// yarn start
+yarn development
