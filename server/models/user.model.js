@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import crypto from 'crypto'
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -12,16 +13,16 @@ const UserSchema = new mongoose.Schema({
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         required: 'Email is required'
     },
-    created: {
-        type: Date,
-        default: Date.now
-    },
-    updated: Date,
     hashed_password: {
         type: String,
         required: "Password is required"
     },
-    salt: String
+    salt: String,
+    updated: Date,
+    created: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 UserSchema
@@ -40,7 +41,7 @@ UserSchema.path('hashed_password').validate(function (v) {
         this.invalidate('password', 'Password must be at least 8 characters.')
     }
     if (this.isNew && !this._password) {
-        this.invalidate('password', 'Password is required')
+        this.invalidate('password', 'user.model Password is required')
     }
 }, null)
 
