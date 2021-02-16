@@ -6,7 +6,7 @@ export default () => {
                 <title>MERN Skeleton</title>
             </head>
             <body>
-                <div id="root">Served!?</div>
+                <div id="root">Served!? and re-served</div>
             </body>
         </html>`
 }
