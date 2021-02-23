@@ -7,7 +7,7 @@ export default () => {
             </head>
             <body>
                 <div id="root">
-                    <p>Served!? and re-re-served</p>
+                    <h1>Hola Don</h1>
                 </div>
                 
             </body>
