@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import compress from 'compression'
@@ -7,13 +8,22 @@ import helmet from 'helmet'
 import Template from './../template'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
-import path from 'path'
+
+// modules for server side rendering
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import MainRouter from './../client/MainRouter'
+import { StaticRouter } from 'react-router-dom'
+
+import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
+import theme from './../client/theme'
+//end
 
 // next line is for development only: Comment out for production
 import devBundle from './devBundle'
 
-const app = express()
 const CURRENT_WORKING_DIR = process.cwd()
+const app = express()
 
 // next line is for development only: Comment out for production
 devBundle.compile(app)
@@ -24,9 +34,12 @@ app.use(cookieParser())
 app.use(compress())
 app.use(helmet())
 app.use(cors())
+
+app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
+
+// mount routes
 app.use('/', userRoutes)
 app.use('/', authRoutes)
-app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 app.get('/', (req, res) => {
     res.status(200).send(Template())

@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default funtion Home() {
+export default function Home() {
     const classes = useStyles()
     return (
         <Card className={classes.card}>
