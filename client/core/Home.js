@@ -33,6 +33,7 @@ export default function Home() {
                 <Typography variant="body2" component="p">
                     Welcome to Don's Awesome MERN Skeleton home page.
                 </Typography>
+                <Link to="/users">Users</Link>
             </CardContent>
         </Card>
     )
